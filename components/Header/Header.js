@@ -1,4 +1,4 @@
-import * as React from "react";
+import React, { useEffect, useState } from "react";
 import { styled, useTheme } from "@mui/material/styles";
 import Box from "@mui/material/Box";
 import MuiDrawer from "@mui/material/Drawer";
@@ -27,6 +27,10 @@ import PublicIcon from "@mui/icons-material/Public";
 import SearchIcon from "@mui/icons-material/Search";
 import TelegramIcon from "@mui/icons-material/Telegram";
 import { Navbar } from "../Navbar";
+import InputField from "../../theme/Input";
+import { Button } from "@material-ui/core";
+import { useDispatch } from "react-redux";
+import { increment } from "../../redux/features/counter/counterSlice";
 
 const drawerWidth = 240;
 
@@ -97,7 +101,11 @@ const AppBar = styled(MuiAppBar, {
 
 export default function MiniDrawer() {
   const theme = useTheme();
-  const [open, setOpen] = React.useState(false);
+  const [open, setOpen] = useState(false);
+  const [MenuDashboard, setMenuDashboard] = useState(false);
+  const [OpenSearch, setOpenSearch] = useState(false);
+  const [OpenChat, setOpenChat] = useState(false);
+  const [OpenBrowse, setOpenBrowse] = useState(false);
 
   const handleDrawerOpen = () => {
     setOpen(true);
@@ -106,6 +114,40 @@ export default function MiniDrawer() {
   const handleDrawerClose = () => {
     setOpen(open ? false : true);
   };
+
+  useEffect(() => {
+    if (MenuDashboard) {
+      setOpenSearch(false);
+      setOpenChat(false);
+      setOpenBrowse(false);
+    }
+  }, [MenuDashboard]);
+
+  useEffect(() => {
+    if (OpenSearch) {
+      setMenuDashboard(false);
+      setOpenChat(false);
+      setOpenBrowse(false);
+    }
+  }, [OpenSearch]);
+
+  useEffect(() => {
+    if (OpenChat) {
+      setOpenSearch(false);
+      setMenuDashboard(false);
+      setOpenBrowse(false);
+    }
+  }, [OpenChat]);
+
+  useEffect(() => {
+    if (OpenBrowse) {
+      setOpenSearch(false);
+      setOpenChat(false);
+      setMenuDashboard(false);
+    }
+  }, [OpenBrowse]);
+
+  const dispatch = useDispatch();
 
   return (
     <Box className="flex">
@@ -120,16 +162,56 @@ export default function MiniDrawer() {
         </Box>
         <Box className="flex flex-col justify-center align-middle h-[90vh]">
           <List className="flex flex-1 justify-center align-middle flex-col  ">
-            <ListItems icon={DashboardIcon} color="white" active={true} />
-            <ListItems icon={PublicIcon} color="white" />
-            <ListItems icon={TelegramIcon} color="white" />
-            <ListItems icon={SearchIcon} color="white" />
+            <ListItems
+              icon={DashboardIcon}
+              color="white"
+              active={MenuDashboard}
+              OpentoClick={setMenuDashboard}
+              OpenValue={MenuDashboard}
+            />
+            <ListItems
+              icon={PublicIcon}
+              color="white"
+              active={OpenBrowse}
+              OpentoClick={setOpenBrowse}
+              OpenValue={OpenBrowse}
+            />
+            <ListItems
+              icon={TelegramIcon}
+              color="white"
+              active={OpenChat}
+              OpentoClick={setOpenChat}
+              OpenValue={OpenChat}
+            />
+            <ListItems
+              icon={SearchIcon}
+              color="white"
+              active={OpenSearch}
+              OpentoClick={setOpenSearch}
+              OpenValue={OpenSearch}
+            />
           </List>
         </Box>
       </Box>
-      <Collapse orientation="horizontal" in={open} timeout={10}>
-        <Box className="h-screen w-56 bg-slate-200 rounded-tr-2xl rounded-br-rounded-tr-2xl">
+      <Collapse orientation="horizontal" in={MenuDashboard} timeout={10}>
+        <Box className="h-screen w-64 bg-slate-200 rounded-tr-2xl rounded-br-rounded-tr-2xl">
           <Navbar />
+        </Box>
+      </Collapse>
+      <Collapse orientation="horizontal" in={OpenSearch} timeout={10}>
+        <Box className="h-screen w-64 bg-slate-200 rounded-tr-2xl rounded-br-rounded-tr-2xl">
+          <Box className="flex justify-center align-middle">
+            <InputField label="Search" variant="standard" />
+          </Box>
+          <Box className="flex justify-center align-middle pt-10">
+            <Button
+              variant="outlined"
+              className="mx-10"
+              onClick={() => dispatch(increment())}
+            >
+              Increment
+            </Button>
+          </Box>
         </Box>
       </Collapse>
     </Box>
