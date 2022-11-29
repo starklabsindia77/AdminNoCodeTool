@@ -21,14 +21,14 @@ import MailIcon from "@mui/icons-material/Mail";
 import DashboardIcon from "@mui/icons-material/Dashboard";
 import DiamondIcon from "@mui/icons-material/Diamond";
 import Drawer from "@mui/material/Drawer";
-import { Collapse, Fade } from "@mui/material";
+import { Avatar, Collapse, Fade } from "@mui/material";
 import ListItems from "../../theme/List/ListItems";
 import PublicIcon from "@mui/icons-material/Public";
 import SearchIcon from "@mui/icons-material/Search";
 import TelegramIcon from "@mui/icons-material/Telegram";
 import { Navbar } from "../Navbar";
 import InputField from "../../theme/Input";
-import { Button } from "@material-ui/core";
+import { Button, Grid, Slide } from "@material-ui/core";
 import { useDispatch } from "react-redux";
 import { increment } from "../../redux/features/counter/counterSlice";
 
@@ -99,9 +99,8 @@ const AppBar = styled(MuiAppBar, {
 //   }),
 // }));
 
-export default function MiniDrawer() {
+export default function MiniDrawer({ open, setOpen }) {
   const theme = useTheme();
-  const [open, setOpen] = useState(false);
   const [MenuDashboard, setMenuDashboard] = useState(false);
   const [OpenSearch, setOpenSearch] = useState(false);
   const [OpenChat, setOpenChat] = useState(false);
@@ -114,6 +113,14 @@ export default function MiniDrawer() {
   const handleDrawerClose = () => {
     setOpen(open ? false : true);
   };
+
+  useEffect(() => {
+    if (OpenBrowse || MenuDashboard || OpenSearch || OpenChat) {
+      setOpen(true);
+    } else {
+      setOpen(false);
+    }
+  }, [MenuDashboard, OpenSearch, OpenChat, OpenBrowse]);
 
   useEffect(() => {
     if (MenuDashboard) {
@@ -150,17 +157,17 @@ export default function MiniDrawer() {
   const dispatch = useDispatch();
 
   return (
-    <Box className="flex">
-      <Box className=" w-16 h-screen bg-[#2b4feb] ">
+    <Grid container className="sticky top-0">
+      <Grid xs={open ? 2 : 6} className="h-screen bg-[#2b4feb] ">
         <Box className="flex justify-center align-middle pt-5">
-          <IconButton onClick={handleDrawerClose}>
+          <IconButton>
             <DiamondIcon
               style={{ color: "white" }}
               className="animate-bounce"
             />
           </IconButton>
         </Box>
-        <Box className="flex flex-col justify-center align-middle h-[90vh]">
+        <Box className="flex flex-col justify-center align-middle h-[82vh] flex-1">
           <List className="flex flex-1 justify-center align-middle flex-col  ">
             <ListItems
               icon={DashboardIcon}
@@ -168,6 +175,7 @@ export default function MiniDrawer() {
               active={MenuDashboard}
               OpentoClick={setMenuDashboard}
               OpenValue={MenuDashboard}
+              title="Dashboard"
             />
             <ListItems
               icon={PublicIcon}
@@ -175,6 +183,7 @@ export default function MiniDrawer() {
               active={OpenBrowse}
               OpentoClick={setOpenBrowse}
               OpenValue={OpenBrowse}
+              title="Browser"
             />
             <ListItems
               icon={TelegramIcon}
@@ -182,6 +191,7 @@ export default function MiniDrawer() {
               active={OpenChat}
               OpentoClick={setOpenChat}
               OpenValue={OpenChat}
+              title="Chats"
             />
             <ListItems
               icon={SearchIcon}
@@ -189,17 +199,36 @@ export default function MiniDrawer() {
               active={OpenSearch}
               OpentoClick={setOpenSearch}
               OpenValue={OpenSearch}
+              title="Search"
             />
           </List>
         </Box>
-      </Box>
-      <Collapse orientation="horizontal" in={MenuDashboard} timeout={10}>
-        <Box className="h-screen w-64 bg-slate-200 rounded-tr-2xl rounded-br-rounded-tr-2xl">
-          <Navbar />
+        <Box className="flex justify-center">
+          <Avatar
+            className="cursor-pointer"
+            src="https://mui.com/static/images/avatar/1.jpg"
+          />
         </Box>
+      </Grid>
+      <Collapse
+        in={MenuDashboard}
+        style={{ display: !MenuDashboard && "none" }}
+      >
+        <Grid
+          xs
+          className="h-screen w-[20vw] max-w-full  bg-slate-200 rounded-tr-2xl rounded-br-rounded-tr-2xl"
+        >
+          {/* <Box className="h-screen  bg-slate-200 rounded-tr-2xl rounded-br-rounded-tr-2xl"> */}
+          <Navbar setMenuDashboard={setMenuDashboard} />
+          {/* <Typography>shivam</Typography> */}
+          {/* </Box> */}
+        </Grid>
       </Collapse>
-      <Collapse orientation="horizontal" in={OpenSearch} timeout={10}>
-        <Box className="h-screen w-64 bg-slate-200 rounded-tr-2xl rounded-br-rounded-tr-2xl">
+      <Collapse in={OpenSearch}>
+        <Grid
+          xs
+          className="h-screen w-[20vw] max-w-full  bg-slate-200 rounded-tr-2xl rounded-br-rounded-tr-2xl"
+        >
           <Box className="flex justify-center align-middle">
             <InputField label="Search" variant="standard" />
           </Box>
@@ -212,9 +241,9 @@ export default function MiniDrawer() {
               Increment
             </Button>
           </Box>
-        </Box>
+        </Grid>
       </Collapse>
-    </Box>
+    </Grid>
   );
 }
 

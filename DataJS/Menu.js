@@ -28,6 +28,7 @@ export const menu = [
     icon: <HomeOutlinedIcon />,
     title: "App",
     active: true,
+    link: "/",
     items: [],
   },
   {
