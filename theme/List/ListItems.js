@@ -2,9 +2,24 @@ import { ListItem, ListItemButton, ListItemIcon } from "@mui/material";
 import React from "react";
 import Icon from "../Icon/Icon";
 
-function ListItems({ text, size, icon, listtext, open, color, active }) {
+function ListItems({
+  text,
+  size,
+  icon,
+  listtext,
+  open,
+  color,
+  active,
+  OpentoClick,
+  OpenValue,
+}) {
   return (
-    <ListItem key={text} disablePadding sx={{ display: "block" }}>
+    <ListItem
+      key={text}
+      disablePadding
+      sx={{ display: "block" }}
+      onClick={() => OpentoClick(!OpenValue)}
+    >
       <ListItemButton
         sx={{
           minHeight: 48,

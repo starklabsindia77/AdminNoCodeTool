@@ -31,23 +31,25 @@ export const Navbar = () => {
     setOpen(!open);
   };
   return (
-    <Box className="pt-3 ">
+    <Box className="pt-3 h-screen scrollbar-thin scrollbar-thumb-slate-300 scrollbar-thumb-rounded-md">
       {menu.map((item) =>
         !item.items?.length > 0 || item.role ? (
           <div key={item.title}>
             {item.role ? (
               <Typography
                 variant="subtitle2"
-                className="pl-5 py-4 text-gray-400 uppercase"
+                className="pl-5 py-4 text-gray-600 font-semibold uppercase"
               >
                 {item.title}
               </Typography>
             ) : (
-              <ListItem button className="bg-slate-800">
-                <ListItemIcon>{item.icon}</ListItemIcon>
+              <ListItem button className="">
+                <ListItemIcon style={{ color: item.active && "#2b4feb" }}>
+                  {item.icon}
+                </ListItemIcon>
                 <ListItemText
                   primary={item.title}
-                  className=" text-gray-500 "
+                  className={item.active ? "text-mainColor" : "text-gray-500"}
                 />
               </ListItem>
             )}

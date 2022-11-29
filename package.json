@@ -16,14 +16,17 @@
     "@mui/icons-material": "^5.10.15",
     "@mui/material": "^5.10.15",
     "@mui/styled-engine-sc": "^5.10.14",
+    "@reduxjs/toolkit": "^1.9.0",
     "next": "13.0.5",
     "react": "18.2.0",
     "react-dom": "18.2.0",
+    "react-redux": "^8.0.5",
     "styled-components": "^5.3.6"
   },
   "devDependencies": {
     "autoprefixer": "^10.4.13",
     "postcss": "^8.4.19",
+    "tailwind-scrollbar": "^2.0.1",
     "tailwindcss": "^3.2.4"
   }
 }
