@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import ListItem from "@material-ui/core/ListItem";
 import ListItemIcon from "@material-ui/core/ListItemIcon";
 import ListItemText from "@material-ui/core/ListItemText";
-import { menu } from "../../js/Menu";
+import { menu } from "../../DataJS/Menu";
 import { Box, List, Typography } from "@mui/material";
 import Listitemmenu from "../../theme/List/Listitemmenu";
 
@@ -10,6 +10,8 @@ import { makeStyles } from "@material-ui/core/styles";
 import Collapse from "@material-ui/core/Collapse";
 import ExpandLess from "@material-ui/icons/ExpandLess";
 import ExpandMore from "@material-ui/icons/ExpandMore";
+import Link from "next/link";
+import { useRouter } from "next/router";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -22,8 +24,9 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export const Navbar = () => {
+export const Navbar = ({ setMenuDashboard }) => {
   const classes = useStyles();
+  const router = useRouter();
 
   const [open, setOpen] = useState(false);
 
@@ -43,15 +46,28 @@ export const Navbar = () => {
                 {item.title}
               </Typography>
             ) : (
-              <ListItem button className="">
-                <ListItemIcon style={{ color: item.active && "#2b4feb" }}>
-                  {item.icon}
-                </ListItemIcon>
-                <ListItemText
-                  primary={item.title}
-                  className={item.active ? "text-mainColor" : "text-gray-500"}
-                />
-              </ListItem>
+              <Link
+                href={`${item.link}`}
+                onClick={() => setMenuDashboard(false)}
+              >
+                <ListItem button className="">
+                  <ListItemIcon
+                    style={{
+                      color: router.asPath == item.link && "#2b4feb",
+                    }}
+                  >
+                    {item.icon}
+                  </ListItemIcon>
+                  <ListItemText
+                    primary={item.title}
+                    className={
+                      router.asPath == item.link
+                        ? "text-mainColor"
+                        : "text-gray-500"
+                    }
+                  />
+                </ListItem>
+              </Link>
             )}
           </div>
         ) : (
