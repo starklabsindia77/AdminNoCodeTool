@@ -90,8 +90,8 @@ export function DoughnutChat() {
         options={options}
         series={options.series}
         type="donut"
-        width={500}
-        height={320}
+        // width={400}
+        height={310}
       />
     </Box>
   );

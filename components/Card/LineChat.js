@@ -138,7 +138,7 @@ function LineChat() {
         options={options}
         series={series}
         type="line"
-        width={500}
+        // width={500}
         height={250}
       />
     </Box>

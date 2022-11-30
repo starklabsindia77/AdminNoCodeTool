@@ -19,6 +19,8 @@ import ForumIcon from "@mui/icons-material/Forum";
 import MarkEmailUnreadIcon from "@mui/icons-material/MarkEmailUnread";
 import ViewKanbanIcon from "@mui/icons-material/ViewKanban";
 
+import DesignServicesIcon from "@mui/icons-material/DesignServices";
+
 export const menu = [
   {
     title: "Dashboard",
@@ -362,73 +364,22 @@ export const menu = [
     icon: <ViewKanbanIcon />,
     title: "Kanban",
   },
-  // {
-  //   icon: <DescriptionOutlinedIcon />,
-  //   title: "Blog",
-  //   items: [
-  //     {
-  //       title: "Technical Analysis",
-  //       items: [
-  //         {
-  //           title: "The Dow Theory",
-  //           to: "/thedowtheory",
-  //         },
-  //         {
-  //           title: "Charts & Chart Patterns",
-  //           to: "/chart",
-  //         },
-  //         {
-  //           title: "Trend & Trend Lines",
-  //           to: "/trendlines",
-  //         },
-  //         {
-  //           title: "Support & Resistance",
-  //           to: "/sandr",
-  //         },
-  //       ],
-  //     },
-  //     {
-  //       title: "Fundamental Analysis",
-  //       items: [
-  //         {
-  //           title: "The Dow Theory",
-  //           to: "/thedowtheory",
-  //         },
-  //         {
-  //           title: "Charts & Chart Patterns",
-  //           to: "/chart",
-  //         },
-  //         {
-  //           title: "Trend & Trend Lines",
-  //           to: "/trendlines",
-  //         },
-  //         {
-  //           title: "Support & Resistance",
-  //           to: "/sandr",
-  //         },
-  //       ],
-  //     },
-  //     {
-  //       title: "Elliot Wave Analysis",
-  //       items: [
-  //         {
-  //           title: "The Dow Theory",
-  //           to: "/thedowtheory",
-  //         },
-  //         {
-  //           title: "Charts & Chart Patterns",
-  //           to: "/chart",
-  //         },
-  //         {
-  //           title: "Trend & Trend Lines",
-  //           to: "/trendlines",
-  //         },
-  //         {
-  //           title: "Support & Resistance",
-  //           to: "/sandr",
-  //         },
-  //       ],
-  //     },
-  //   ],
-  // },
+  //Componenets
+  {
+    title: "Components",
+    role: true,
+  },
+  {
+    icon: <DesignServicesIcon />,
+    title: "Button",
+    link: "/Buttonpage",
+  },
+  {
+    icon: <DesignServicesIcon />,
+    title: "Card",
+  },
+  {
+    icon: <DesignServicesIcon />,
+    title: "Colors",
+  },
 ];
