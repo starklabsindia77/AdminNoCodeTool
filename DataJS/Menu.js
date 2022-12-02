@@ -42,6 +42,7 @@ export const menu = [
   {
     icon: <TrendingUpIcon />,
     title: "Analitics",
+    link: "/Analitics",
     items: [],
   },
   {
@@ -351,6 +352,7 @@ export const menu = [
   {
     icon: <MarkEmailUnreadIcon />,
     title: "Mail",
+    link: "/Mail",
   },
   {
     icon: <ForumIcon />,

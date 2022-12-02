@@ -31,6 +31,7 @@ import InputField from "../../theme/Input";
 import { Button, Grid, Slide } from "@material-ui/core";
 import { useDispatch } from "react-redux";
 import { increment } from "../../redux/features/counter/counterSlice";
+import { useAuth0 } from "@auth0/auth0-react";
 
 const drawerWidth = 240;
 
@@ -106,6 +107,11 @@ export default function MiniDrawer({ open, setOpen }) {
   const [OpenChat, setOpenChat] = useState(false);
   const [OpenBrowse, setOpenBrowse] = useState(false);
 
+  const { user, isAuthenticated, isLoading, loginWithRedirect, logout } =
+    useAuth0();
+
+  console.log(user);
+
   const handleDrawerOpen = () => {
     setOpen(true);
   };
@@ -167,7 +173,7 @@ export default function MiniDrawer({ open, setOpen }) {
             />
           </IconButton>
         </Box>
-        <Box className="flex flex-col justify-center align-middle h-[82vh] flex-1">
+        <Box className="flex flex-col justify-center align-middle h-[82vh] ">
           <List className="flex flex-1 justify-center align-middle flex-col  ">
             <ListItems
               icon={DashboardIcon}
@@ -202,12 +208,20 @@ export default function MiniDrawer({ open, setOpen }) {
               title="Search"
             />
           </List>
-        </Box>
-        <Box className="flex justify-center">
-          <Avatar
-            className="cursor-pointer"
-            src="https://mui.com/static/images/avatar/1.jpg"
-          />
+          <Box className="flex justify-center">
+            {!user ? (
+              <Avatar
+                className="cursor-pointer"
+                onClick={() => loginWithRedirect()}
+              />
+            ) : (
+              <Avatar
+                className="cursor-pointer"
+                src={user?.picture}
+                onClick={() => logout({ returnTo: "http://localhost:3000/" })}
+              />
+            )}
+          </Box>
         </Box>
       </Grid>
       <Collapse
