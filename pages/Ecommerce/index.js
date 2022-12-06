@@ -93,7 +93,10 @@ function Ecommerce({ data }) {
                 onClick={() => setOpenSearch(!OpenSearch)}
               > */}
               <CloseIcon
-                onClick={() => setOpenSearch(!OpenSearch)}
+                onClick={() => {
+                  setOpenSearch(!OpenSearch);
+                  setSearchvalue("");
+                }}
                 className="mx-2 cursor-pointer"
                 color="action"
               />

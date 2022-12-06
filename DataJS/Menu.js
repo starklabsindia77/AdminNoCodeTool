@@ -361,6 +361,7 @@ export const menu = [
   {
     icon: <CalendarMonthIcon />,
     title: "Calendar",
+    link: "/Calendar",
   },
   {
     icon: <ViewKanbanIcon />,

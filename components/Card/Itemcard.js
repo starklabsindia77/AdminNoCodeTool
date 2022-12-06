@@ -34,7 +34,7 @@ export default function Itemcard({ item, setCartValue }) {
 
   return (
     <Card
-      className="group shadow-lg hover:shadow-mainColor transition-all"
+      className="group shadow-lg hover:shadow-mainColor transition-all hover:scale-105"
       sx={{ maxWidth: 345 }}
     >
       {/* <CardHeader
@@ -60,12 +60,9 @@ export default function Itemcard({ item, setCartValue }) {
       /> */}
       <Typography
         variant="inherit"
-        className="p-3 font-semibold italic text-gray-600 group-hover:text-mainColor transition-all"
+        className="p-3 font-semibold italic text-gray-600 group-hover:text-mainColor group-hover:animate-marquee whitespace-nowrap transition-all"
       >
-        {}
-        {item.title?.length > 35
-          ? item.title?.slice(0, 35) + "..."
-          : item.title}
+        {item.title}
       </Typography>
       <Box className="flex justify-center items-center h-52">
         <Image
@@ -88,6 +85,7 @@ export default function Itemcard({ item, setCartValue }) {
           <IconButton
             aria-label="add to favorites"
             onClick={() => setExpanded(!expanded)}
+            className="group-hover:animate-pulse"
           >
             <FavoriteIcon color={expanded ? "error" : ""} />
           </IconButton>
@@ -97,7 +95,7 @@ export default function Itemcard({ item, setCartValue }) {
         </Box>
         <button
           onClick={() => setCartValue((prev) => prev + 1)}
-          className="bg-mainColor transition-all hover:scale-105 hover:border-mainColor text-white font-semibold py-1 px-10 rounded-full"
+          className="bg-mainColor transition-all hover:scale-105 group-hover:animate-bounce hover:border-mainColor text-white font-semibold py-1 px-10 rounded-full"
         >
           + to Cart
         </button>

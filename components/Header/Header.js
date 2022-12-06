@@ -174,7 +174,7 @@ export default function MiniDrawer({ open, setOpen }) {
           </IconButton>
         </Box>
         <Box className="flex flex-col justify-center align-middle h-[82vh] ">
-          <List className="flex flex-1 justify-center align-middle flex-col  ">
+          <List className="flex flex-1 justify-center items-center  flex-col">
             <ListItems
               icon={DashboardIcon}
               color="white"
