@@ -90,7 +90,7 @@ export function GroupChat() {
         options={options}
         series={options.series}
         type="candlestick"
-        width={700}
+        // width={550}
         height={310}
       />
     </Box>

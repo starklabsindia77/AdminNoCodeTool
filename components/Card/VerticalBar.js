@@ -119,7 +119,7 @@ export function VerticalBar() {
         options={options}
         series={series}
         type="boxPlot"
-        width={500}
+        // width={500}
         height={250}
       />
     </Box>

@@ -41,9 +41,9 @@ export const Navbar = ({ setMenuDashboard }) => {
             {item.role ? (
               <Typography
                 variant="subtitle2"
-                className="pl-5 py-4 text-gray-600 font-semibold uppercase"
+                className="pl-5 py-4 text-gray-600 font-semibold uppercase "
               >
-                {item.title}
+                <span>{item.title}</span>
               </Typography>
             ) : (
               <Link
