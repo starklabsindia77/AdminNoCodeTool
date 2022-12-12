@@ -13,7 +13,6 @@ import MailHeader from "./MailHeader";
 import MailTable from "./MailTable";
 import AddIcon from "@mui/icons-material/Add";
 import MailCompose from "./MailCompose";
-import Slide from "@mui/material/Slide";
 import { Collapse } from "@mui/material";
 import CustomizedBreadcrumbs from "./CustomizedBreadcrumbs.js";
 
