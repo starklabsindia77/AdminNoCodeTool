@@ -17,6 +17,8 @@ import MoreVertIcon from "@mui/icons-material/MoreVert";
 import Image from "next/image";
 import { Box } from "@material-ui/core";
 import { Button } from "@mui/material";
+import { useDispatch } from "react-redux";
+import { AddToCart } from "../../redux/features/counter/ecommerceSlice";
 
 const ExpandMore = styled((props) => {
   const { expand, ...other } = props;
@@ -31,6 +33,7 @@ const ExpandMore = styled((props) => {
 
 export default function Itemcard({ item, setCartValue }) {
   const [expanded, setExpanded] = React.useState(false);
+  const dispatch = useDispatch();
 
   return (
     <Card
@@ -60,7 +63,7 @@ export default function Itemcard({ item, setCartValue }) {
       /> */}
       <Typography
         variant="inherit"
-        className="p-3 font-semibold italic text-gray-600 group-hover:text-mainColor group-hover:animate-marquee whitespace-nowrap transition-all"
+        className="p-3 font-semibold italic text-gray-600 group-hover:text-mainColor whitespace-nowrap group-hover:whitespace-normal transition-all"
       >
         {item.title}
       </Typography>
@@ -74,6 +77,9 @@ export default function Itemcard({ item, setCartValue }) {
         />
       </Box>
       <CardContent>
+        <Typography variant="inherit" className="font-semibold py-2">
+          $ {item.price}
+        </Typography>
         <Typography variant="body2" color="text.secondary">
           {item.description?.length > 70
             ? item.description?.slice(0, 70) + "..."
@@ -94,7 +100,7 @@ export default function Itemcard({ item, setCartValue }) {
           </IconButton>
         </Box>
         <button
-          onClick={() => setCartValue((prev) => prev + 1)}
+          onClick={() => dispatch(AddToCart(item))}
           className="bg-mainColor transition-all hover:scale-105 group-hover:animate-bounce hover:border-mainColor text-white font-semibold py-1 px-10 rounded-full"
         >
           + to Cart

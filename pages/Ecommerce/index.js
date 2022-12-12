@@ -9,18 +9,24 @@ import {
   styled,
   TextField,
   Typography,
+  Slide,
 } from "@material-ui/core";
 import React, { useEffect, useState } from "react";
 import SearchIcon from "@mui/icons-material/Search";
 import ShoppingBasketIcon from "@mui/icons-material/ShoppingBasket";
 import Itemcard from "../../components/Card/Itemcard";
 import CloseIcon from "@mui/icons-material/Close";
+import CartItem from "./CartItem";
+import { ecommercelist } from "../../redux/features/counter/ecommerceSlice";
+import { useSelector } from "react-redux";
 
 function Ecommerce({ data }) {
   console.log(data);
   const [OpenSearch, setOpenSearch] = useState(false);
   const [Searchvalue, setSearchvalue] = useState("");
-  const [CartValue, setCartValue] = useState(0);
+
+  const [cartOpen, setcartOpen] = useState(false);
+  const CartValue = useSelector((state) => ecommercelist(state));
 
   const Search = styled("div")(({ theme }) => ({
     position: "relative",
@@ -109,24 +115,41 @@ function Ecommerce({ data }) {
               <SearchIcon />
             </IconButton>
           )}
-          <IconButton>
-            <Badge badgeContent={CartValue} color="primary">
+          <IconButton onClick={() => setcartOpen((prev) => !prev)}>
+            <Badge badgeContent={CartValue?.length} color="primary">
               <ShoppingBasketIcon />
             </Badge>
           </IconButton>
         </Box>
       </Grid>
-      {data
-        .filter((e) =>
-          Searchvalue?.length > 0
-            ? e.title.toUpperCase().includes(Searchvalue.toUpperCase())
-            : e
-        )
-        .map((item) => (
-          <Grid key={item.id} className="pt-5" item xs={4}>
-            <Itemcard item={item} setCartValue={setCartValue} />
+      <Grid container>
+        <Grid
+          item
+          xs={cartOpen ? 8 : 12}
+          // className="bg-white px-5 rounded-xl border-2  shadow-sm flex items-center sticky top-0"
+        >
+          <Grid container>
+            {data
+              .filter((e) =>
+                Searchvalue?.length > 0
+                  ? e.title.toUpperCase().includes(Searchvalue.toUpperCase())
+                  : e
+              )
+              .map((item) => (
+                <Grid key={item.id} className="pt-5" item xs={cartOpen ? 6 : 4}>
+                  <Itemcard item={item} />
+                </Grid>
+              ))}
           </Grid>
-        ))}
+        </Grid>
+        <Grid xs={4} className={`${!cartOpen && "hidden"}`}>
+          <Slide direction="left" in={cartOpen}>
+            <Box className="bg-white w-full h-screen my-5 p-5 rounded-xl">
+              <CartItem />
+            </Box>
+          </Slide>
+        </Grid>
+      </Grid>
     </Grid>
   );
 }
